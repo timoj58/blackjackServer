@@ -23,4 +23,16 @@ add_to_balance(Player, Amount) ->
 take_from_balance(Player, Amount) ->
   Player#player{balance=Player#player.balance-Amount}.
 
+set_wager(Player, Wager) ->
+  Player#player{wager=Wager},
+  take_from_balance(Player, Wager).
+
+clear_hands(Player) ->
+  Player#player{hand=[], split_hand=[]}.
+
+add_card(Cards, Player) ->
+  if length(Cards) =:= 1 -> Player#player{hand=[hd(Cards)|Player#player.hand]};
+    true -> Player#player{hand=[hd(Cards)|Player#player.hand], split_hand=[tl(Cards)|Player#player.split_hand]}
+  end.
+
 

@@ -25,3 +25,12 @@ dec_balance_test() -> Player = player:create_player(<<10,22,33>>, "Tim", 200),
   Player2 = player:take_from_balance(Player, 100),
   ?assert(Player2#player.balance =:= 100).
 
+add_card_test() -> Player = player:create_player(<<10,22,33>>, "Tim", 200),
+    Player2 = player:add_card([#card{suit="Aces", value="Queen", numericValue={10,10}}], Player),
+   ?assert(length(Player2#player.hand) =:= 1),
+  %% now add to split hand as well
+  Player3 = player:add_card([#card{suit="Aces", value="Queen", numericValue={10,10}}, #card{suit="Aces", value="Queen", numericValue={10,10}}], Player),
+  ?assert(length(Player3#player.split_hand) =:= 1),
+  Player4 = player:clear_hands(Player3),
+  ?assert(Player4#player.split_hand =:= []).
+

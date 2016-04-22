@@ -43,7 +43,7 @@ start_link() ->
 
 
 init([]) ->
-  {ok,deck:shuffle(lists:seq(1,1000), deck:get_deck(lists:seq(1,1),[]))}.
+  {ok,deck:shuffle(lists:seq(1,1000), deck:get_deck(lists:seq(1,4),[]))}.
 
 
 handle_call({get}, _From, Cards) ->

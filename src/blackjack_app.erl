@@ -3,7 +3,7 @@
 %%%
 %%% Created : 22. Apr 2016 15:24
 %%%-------------------------------------------------------------------
--module(blackjack).
+-module(blackjack_app).
 -author("timmytime").
 
 -behaviour(application).
@@ -32,7 +32,7 @@ stop(_State) ->
   ok.
 
 start_table(Table, {M,F,A}) ->
-  blackjack_server:start_table(Table, {M,F,A}).
+  blackjack_supervisor:start_table(Table, {M,F,A}).
 
 stop_table(Table) -> blackjack_supervisor:stop_table(Table).
 

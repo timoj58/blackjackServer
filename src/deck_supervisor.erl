@@ -55,7 +55,7 @@ start_link() ->
 init([]) ->
   RestartStrategy = one_for_one,
   MaxRestarts = 1,
-  MaxSecondsBetweenRestarts = 5,
+  MaxSecondsBetweenRestarts = 1000,
 
   SupFlags = {RestartStrategy, MaxRestarts, MaxSecondsBetweenRestarts},
 

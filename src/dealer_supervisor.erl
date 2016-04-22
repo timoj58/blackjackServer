@@ -36,11 +36,7 @@ init([]) ->
 
   SupFlags = {RestartStrategy, MaxRestarts, MaxSecondsBetweenRestarts},
 
-  Restart = permanent,
-  Shutdown = 2000,
-  Type = worker,
-
-  AChild = {dealer, {dealer, join_table, []},
+  AChild = {dealer, {dealer, open_table, []},
     permanent, 1000, worker, [dealer]},
 
   {ok, {SupFlags, [AChild]}}.

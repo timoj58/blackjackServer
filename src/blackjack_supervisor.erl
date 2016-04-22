@@ -29,7 +29,7 @@ start_link() ->
 
 start_table(Table, MFA) ->
   ChildSpec = {Table,
-    {dealer_supervisor, start_table, [Table, MFA]},
+    {dealer_supervisor, start_link, [Table, MFA]},
      permanent, 2000, supervisor, [dealer_supervisor]},
   supervisor:start_child(blackjack, ChildSpec).
 
@@ -48,10 +48,6 @@ init([]) ->
   MaxSecondsBetweenRestarts = 3000,
 
   SupFlags = {RestartStrategy, MaxRestarts, MaxSecondsBetweenRestarts},
-
-  Restart = permanent,
-  Shutdown = 2000,
-  Type = worker,
 
   {ok, {SupFlags, []}}.
 

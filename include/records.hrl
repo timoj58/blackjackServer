@@ -9,4 +9,4 @@
 
 -record(card, {suit, value, numericValue}).
 
--record(player, {name, id, balance, hand}).
+-record(player, {name, id, balance, hand=[], split_hand=[], wager=0}).
