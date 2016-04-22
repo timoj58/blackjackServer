@@ -1,11 +1,9 @@
 %%%-------------------------------------------------------------------
 %%% @author timmytime
-%%% @doc
-%%%
-%%% @end
-%%% Created : 22. Apr 2016 11:33
+
+%%% Created : 22. Apr 2016 15:45
 %%%-------------------------------------------------------------------
--module(deck_server).
+-module(dealer).
 -author("timmytime").
 
 -behaviour(gen_server).
@@ -19,9 +17,7 @@
   handle_cast/2,
   handle_info/2,
   terminate/2,
-  code_change/3,
-  get_card/1,
-  shuffle/0]).
+  code_change/3]).
 
 -define(SERVER, ?MODULE).
 
@@ -31,23 +27,21 @@
 %%% API
 %%%===================================================================
 
-shuffle() ->
-  gen_server:start_link(?MODULE, [],[]).
-
-get_card(Pid) ->
-   gen_server:call(Pid, {get}).
-
 
 start_link() ->
   gen_server:start_link({local, ?SERVER}, ?MODULE, [], []).
 
+%%%===================================================================
+%%% gen_server callbacks
+%%%===================================================================
+
 
 init([]) ->
-  {ok,deck:shuffle(lists:seq(1,1000), deck:get_deck(lists:seq(1,1),[]))}.
+  {ok, #state{}}.
 
 
-handle_call({get}, _From, Cards) ->
-  {reply, hd(Cards), tl(Cards)}.
+handle_call(_Request, _From, State) ->
+  {reply, ok, State}.
 
 
 handle_cast(_Request, State) ->
@@ -64,3 +58,6 @@ terminate(_Reason, _State) ->
 code_change(_OldVsn, State, _Extra) ->
   {ok, State}.
 
+%%%===================================================================
+%%% Internal functions
+%%%===================================================================

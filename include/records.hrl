@@ -8,3 +8,5 @@
 -author("timmytime").
 
 -record(card, {suit, value, numericValue}).
+
+-record(player, {name, id, balance, hand}).
