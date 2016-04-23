@@ -144,7 +144,9 @@ handle_info(_Info, State) ->
   {noreply, State}.
 
 
-terminate(_Reason, _State) ->
+terminate(_Reason, {DeckPid,TablePid}) ->
+  table_server:cast(DeckPid, terminate),
+  deck_server:cast(TablePid, terminate),
   ok.
 
 code_change(_OldVsn, State, _Extra) ->

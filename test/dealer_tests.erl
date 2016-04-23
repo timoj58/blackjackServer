@@ -24,7 +24,16 @@ dealer_test() ->
   ?assert(length(Player4#player.hand) =:= 4),
   ?assert(Player4#player.balance =:= 170),
   Player5 = dealer:surrender(Player4),
-  ?assert(round(Player5#player.balance) =:= 185).
+  ?assert(round(Player5#player.balance) =:= 185),
+
+
+  Player6 = Player#player{hand=[#card{suit="Aces", value="Queen", numericValue={10,10}}, #card{suit="Aces", value="Queen", numericValue={10,10}}]},
+  Player7 = dealer:split(Player6),
+  ?assert(length(Player7#player.hand) == 1),
+  ?assert(length(Player7#player.split_hand) == 1).
+
+
+
 
 
 
@@ -32,6 +41,6 @@ dealer_test() ->
 
 %%double_down_test() -> .
 
-%%split_test() -> .
+
 
 %%surrender_test() -> .
