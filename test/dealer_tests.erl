@@ -48,6 +48,46 @@ dealer_hand_test() ->
   ?assert((lists:nth(2,HandValue2) =:= 11)).
 
 
+dealer_validate_bad_hand_test() ->
+
+  Card = card:create_card("Spades", "Queen"),
+  Card2 = card:create_card("Spades", "Queen"),
+  Card3 = card:create_card("Spades", "Queen"),
+
+  HandValue = dealer:get_hand_values([Card,Card2, Card3], [0]),
+
+  Res = dealer:validate_hand_values(HandValue, "False"),
+
+  ?assert(Res =:= "False").
+
+dealer_validate_good_hand_test() ->
+
+  Card = card:create_card("Spades", "Queen"),
+  Card2 = card:create_card("Spades", 5),
+  Card3 = card:create_card("Spades", 3),
+
+  HandValue = dealer:get_hand_values([Card,Card2, Card3], [0]),
+
+  Res = dealer:validate_hand_values(HandValue, "False"),
+
+  ?assert(Res =:= "True").
+
+dealer_validate_ace_hand_test() ->
+
+  Card = card:create_card("Spades", "Queen"),
+  Card2 = card:create_card("Spades", "Ace"),
+  Card3 = card:create_card("Spades", 3),
+
+  HandValue = dealer:get_hand_values([Card,Card2, Card3], [0]),
+
+  Res = dealer:validate_hand_values(HandValue, "False"),
+
+  ?assert(Res =:= "True").
+
+
+
+
+
 
 
 

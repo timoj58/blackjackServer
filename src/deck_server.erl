@@ -25,7 +25,6 @@
 
 -define(SERVER, ?MODULE).
 
--record(state, {}).
 
 %%%===================================================================
 %%% API
@@ -52,9 +51,7 @@ handle_call({get}, _From, Cards) ->
   if Cards =:= [] ->
       NewCards = deck:shuffle(lists:seq(1,1000), deck:get_deck(lists:seq(1,4),[])),
     {reply, hd(NewCards), tl(NewCards)};
-     length(Cards) =:= 1 ->
-       NewCards = deck:shuffle(lists:seq(1,1000), deck:get_deck(lists:seq(1,4),[])),
-       {reply, hd(Cards), NewCards};
+     length(Cards) =:= 1 -> {reply, hd(Cards), deck:shuffle(lists:seq(1,1000), deck:get_deck(lists:seq(1,4),[]))};
   true -> {reply, hd(Cards), tl(Cards)}
 end.
 

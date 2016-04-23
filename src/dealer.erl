@@ -36,3 +36,11 @@ add_hand_value([Hand|Alt], Value, Acc) ->
   add_hand_value(Alt, Value, lists:append(Acc, [Hand + Value])).
 
 
+validate_hand_values([], Valid) -> Valid;
+validate_hand_values([Hand|Rest], _) ->
+  if Hand > 21 -> validate_hand_values(Rest, "False");
+    true -> "True"
+  end.
+
+
+
