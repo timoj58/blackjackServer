@@ -7,6 +7,6 @@
 %%%-------------------------------------------------------------------
 -author("timmytime").
 
--record(card, {suit, value, numericValue}).
+-record(card, {suit, value, numericValue, faceDown=true}).
 
 -record(player, {name, id, balance, hand=[], split_hand=[], wager=0}).

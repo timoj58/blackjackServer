@@ -23,10 +23,10 @@
   handle_info/2,
   terminate/2,
   code_change/3,
-join_table/1,
-leave_table/1,
-update_player/1,
-find_player/1]).
+join_table/2,
+leave_table/2,
+update_player/2,
+find_player/2]).
 
 -define(SERVER, ?MODULE).
 
@@ -36,30 +36,36 @@ find_player/1]).
 start_link() ->
   gen_server:start_link({local, ?SERVER}, ?MODULE, [], []).
 
-join_table(Player) -> gen_server:call(Player#player.id, {join, Player}).
+join_table(Player, Pid) -> gen_server:call(Pid, {join, Player}).
 
-leave_table(Player) -> gen_server:call(Player#player.id, {leave, Player}).
+leave_table(Player, Pid) -> gen_server:call(Pid, {leave, Player}).
 
-find_player(Player) -> gen_server:call(Player#player.id, {find, Player}).
+find_player(Player, Pid) -> gen_server:call(Pid, {find, Player}).
 
-update_player(Player) -> gen_server:call(Player#player.id, {update, Player}).
+update_player(Player, Pid) -> gen_server:call(Pid, {update, Player}).
 
 init([]) ->
+  io:format("Table Started~n", []),
   {ok, table:init_table()}.
 
 handle_call({join, Player}, _From, Table) ->
+  io:format("Join Table ~s~n", [Player#player.name]),
   Updated = table:join_table(Player, Table),
-  {reply, Updated, Updated};
+  {reply, ok, Updated};
 
 handle_call({leave, Player}, _From, Table) ->
+  io:format("Leave Table ~s~n", [Player#player.name]),
   Updated = table:leave_table(Player, Table) ,
-  {reply, ok, Updated, Updated};
+  {reply, ok, Updated};
 
 handle_call({update, Player}, _From, Table) ->
-  table:update_player(Player, Table);
+  io:format("Update Player ~s~n", [Player#player.name]),
+  Updated = table:update_player(Player, Table),
+  {reply, ok, Updated};
 
 handle_call({find, Player}, _From, Table) ->
-  table:find_player(Player, Table);
+  io:format("Find Player ~s~n", [Player#player.name]),
+  {reply, table:find_player(Player, Table), Table};
 
 handle_call(_Request, _From, State) ->
   {reply, ok, State}.

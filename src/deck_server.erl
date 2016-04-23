@@ -43,11 +43,20 @@ start_link() ->
 
 
 init([]) ->
+  io:format("Shuffle Deck~n", []),
   {ok,deck:shuffle(lists:seq(1,1000), deck:get_deck(lists:seq(1,4),[]))}.
 
 
 handle_call({get}, _From, Cards) ->
-  {reply, hd(Cards), tl(Cards)}.
+  io:format("Get Card~n", []),
+  if Cards =:= [] ->
+      NewCards = deck:shuffle(lists:seq(1,1000), deck:get_deck(lists:seq(1,4),[])),
+    {reply, hd(NewCards), tl(NewCards)};
+     length(Cards) =:= 1 ->
+       NewCards = deck:shuffle(lists:seq(1,1000), deck:get_deck(lists:seq(1,4),[])),
+       {reply, hd(Cards), NewCards};
+  true -> {reply, hd(Cards), tl(Cards)}
+end.
 
 
 handle_cast(_Request, State) ->
@@ -59,6 +68,7 @@ handle_info(_Info, State) ->
 
 
 terminate(_Reason, _State) ->
+  io:format("Terminated~n", []),
   ok.
 
 code_change(_OldVsn, State, _Extra) ->

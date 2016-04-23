@@ -44,15 +44,15 @@ join_table(Player) -> gen_server:call(Player#player.id, {join, Player}).
 
 leave_table(Player) -> gen_server:call(Player#player.id, {leave, Player}).
 
-deal(Player, Wager) -> gen_server:call(Player#player.id, {hit, Wager}).
+deal(Player, Wager) -> gen_server:call(Player#player.id, {deal, Player,  Wager}).
 
-hit(Player) -> gen_server:call(Player#player.id, {hit}).
+hit(Player) -> gen_server:call(Player#player.id, {hit, Player}).
 
-stand(Player) -> gen_server:call(Player#player.id, {stand}).
+stand(Player) -> gen_server:call(Player#player.id, {stand, Player}).
 
-surrender(Player) -> gen_server:call(Player#player.id, {surrender}).
+surrender(Player) -> gen_server:call(Player#player.id, {surrender, Player}).
 
-split(Player) -> gen_server:call(Player#player.id, {split}).
+split(Player) -> gen_server:call(Player#player.id, {split, Player}).
 
 double_down(Player, Wager) -> gen_server:call(Player#player.id, {double_down, Wager}).
 
@@ -66,31 +66,46 @@ start_link() ->
 
 
 init([]) ->
-  %% so: we need to initialise the table, and the cards.
-  %% so firstly.  start the supervisor.  This does not work properly so need to review it further.
-  %% need a better handle on supervisors...start with Deck variant.  Need to start child as well.
-  deck_supervisor:start_link(),
-  table_supervisor:start_link(),
-  deck_server:shuffle(),
-  table_server:start_link(),
-  {ok, #state{}}.
+  io:format("Started Dealer~n", []),
+  {ok, DeckPid} =  deck_server:shuffle(),
+  {ok, TablePid} = table_server:start_link(),
+  {ok, {DeckPid, TablePid}}.
 
 
-handle_call({join, Player}, _From,  State) ->
-  {reply, table_server:join_table(Player), State};
+handle_call({join, Player}, _From,  {DeckPid, TablePid}) ->
+  io:format("Join Table~s~n", [Player#player.name]),
+  table_server:join_table(Player, TablePid),
+  {reply,ok,  {DeckPid, TablePid}};
 
-%%handle_call({leave, Player}, _From,  State) ->
-%%  {reply, ok, table_server:leave_table(Player)};
+handle_call({leave, Player}, _From,  {DeckPid, TablePid}) ->
+  table_server:leave_table(Player, TablePid),
+  {reply, ok, {DeckPid, TablePid}};
 
-handle_call({deal, Player, Wager}, _From, State) ->
-  Updated = player:set_wager(table_server:find_player(Player), Wager),
-  Updated2 = player:add_card(deck_server:get_card(_From), Updated),
-  Updated3 = player:add_card(deck_server:get_card(_From), Updated2),
+handle_call({deal, Player, Wager}, _From, {DeckPid, TablePid}) ->
+  Updated = player:set_wager(table_server:find_player(Player, TablePid), Wager),
+  Updated2 = player:add_card([deck_server:get_card(DeckPid)], Updated),
+  Updated3 = player:add_card([deck_server:get_card(DeckPid)], Updated2),
+  table_server:update_player(Updated3, TablePid),
 
-  {reply, Updated3#player.hand, table_server:update_player(Updated3, State)};
+  {reply, Updated3#player.hand, {DeckPid, TablePid}};
 
-%% do not process any rules at this point as there are multiple players (bar going bust obviously).
-%%handle_call({hit}, _From, _) -> ;
+
+handle_call({hit, Player}, _From,  {DeckPid, TablePid}) ->
+  io:format("Hit~n", []),
+  Card = deck_server:get_card(DeckPid),
+
+  if(Player#player.split_hand == []) ->
+    io:format("Normal Hand~n", []),
+    UpdatedPlayer = player:add_card([Card], Player),
+    table_server:update_player(UpdatedPlayer, TablePid),
+    {reply, UpdatedPlayer#player.hand, {DeckPid, TablePid}};
+   true ->
+     io:format("Split Hand~n", []),
+       Card2 = deck_server:get_card(DeckPid),
+       UpdatedPlayer = player:add_card([Card,Card2], Player),
+       table_server:update_player(UpdatedPlayer, TablePid),
+     {reply,{UpdatedPlayer#player.hand,UpdatedPlayer#player.split_hand, {DeckPid, TablePid}}}
+end;
 
 %%handle_call({stand}, _From, State) -> {reply, ok, State};
 

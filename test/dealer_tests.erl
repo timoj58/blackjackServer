@@ -10,6 +10,19 @@
 -author("timmytime").
 
 -include_lib("eunit/include/eunit.hrl").
+-include("records.hrl").
 
-simple_test() ->
-  ?assert(true).
+dealer_test() ->
+  {ok,Pid} = dealer:open_table(),
+  Player = player:create_player(Pid, "Tim", 200),
+  dealer:join_table(Player),
+  Cards = dealer:deal(Player, 10),
+  ?assert(length(Cards) =:= 2),
+  ?assert(length(dealer:hit(Player)) =:= 1).
+
+
+%%double_down_test() -> .
+
+%%split_test() -> .
+
+%%surrender_test() -> .
