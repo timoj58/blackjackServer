@@ -54,7 +54,7 @@ surrender(Player) -> gen_server:call(Player#player.id, {surrender, Player}).
 
 split(Player) -> gen_server:call(Player#player.id, {split, Player}).
 
-double_down(Player, Wager) -> gen_server:call(Player#player.id, {double_down, Wager}).
+double_down(Player, Wager) -> gen_server:call(Player#player.id, {double_down, Player,  Wager}).
 
 
 start_link() ->
@@ -83,11 +83,12 @@ handle_call({leave, Player}, _From,  {DeckPid, TablePid}) ->
 
 handle_call({deal, Player, Wager}, _From, {DeckPid, TablePid}) ->
   Updated = player:set_wager(table_server:find_player(Player, TablePid), Wager),
+  io:format("player wager is ~w~n", [Updated#player.wager]),
   Updated2 = player:add_card([deck_server:get_card(DeckPid)], Updated),
   Updated3 = player:add_card([deck_server:get_card(DeckPid)], Updated2),
   table_server:update_player(Updated3, TablePid),
 
-  {reply, Updated3#player.hand, {DeckPid, TablePid}};
+  {reply, Updated3, {DeckPid, TablePid}};
 
 
 handle_call({hit, Player}, _From,  {DeckPid, TablePid}) ->
@@ -95,25 +96,42 @@ handle_call({hit, Player}, _From,  {DeckPid, TablePid}) ->
   Card = deck_server:get_card(DeckPid),
 
   if(Player#player.split_hand == []) ->
-    io:format("Normal Hand~n", []),
+    io:format("Normal Hand ~w~n", [length(Player#player.hand)]),
     UpdatedPlayer = player:add_card([Card], Player),
     table_server:update_player(UpdatedPlayer, TablePid),
-    {reply, UpdatedPlayer#player.hand, {DeckPid, TablePid}};
+    {reply, UpdatedPlayer, {DeckPid, TablePid}};
    true ->
-     io:format("Split Hand~n", []),
+     io:format("Split Hand ~s~n", []),
        Card2 = deck_server:get_card(DeckPid),
        UpdatedPlayer = player:add_card([Card,Card2], Player),
        table_server:update_player(UpdatedPlayer, TablePid),
-     {reply,{UpdatedPlayer#player.hand,UpdatedPlayer#player.split_hand, {DeckPid, TablePid}}}
+     {reply,UpdatedPlayer, {DeckPid, TablePid}}
 end;
 
-%%handle_call({stand}, _From, State) -> {reply, ok, State};
+handle_call({stand, Player}, _From, State) -> {reply, ok, State};
 
-%%handle_call({surrender}, _From, _) -> ;
+handle_call({surrender, Player}, _From, {DeckPid, TablePid}) ->
+ %%return half the bet.
+  UpdatedPlayer = player:add_to_balance(Player, Player#player.wager/2),
+  io:format("player balance is now ~w~n", [UpdatedPlayer#player.balance]),
+  table_server:update_player(Player, TablePid),
+  {reply, UpdatedPlayer, {DeckPid, TablePid}};
 
-%%handle_call({split}, _From, _) -> ;
+handle_call({split, Player}, _From, {DeckPid, TablePid}) ->
+ [Card1, Card2 | _] = Player#player.hand,
+  if Card1#card.value == Card2#card.value ->
+    %% simply split the deck...by doing following.
+    UpdatedPlayer = player:split_deck(Player),
+    table_server:update_player(UpdatedPlayer, TablePid),
+    {reply, UpdatedPlayer, {DeckPid, TablePid}};
+    true -> {reply, io:format("You can not split deck~n", []), {DeckPid, TablePid}}
+end;
 
-%%handle_call({double_down, Wager}, _From, _) -> ;
+handle_call({double_down, Player, Wager}, _From, {DeckPid, TablePid}) ->
+  UpdatedPlayer = player:increase_wager(Player, Wager),
+  UpdatedPlayer2 = player:add_card([deck_server:get_card(DeckPid)], UpdatedPlayer),
+  table_server:update_player(Player, TablePid),
+  {reply, UpdatedPlayer2, {DeckPid, TablePid}};
 
 handle_call(_Request, _From, State) ->
   {reply, ok, State}.

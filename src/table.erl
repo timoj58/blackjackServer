@@ -20,6 +20,7 @@ join_table(Player, Table) -> maps:put(Player#player.id, Player, Table).
 leave_table(Player, Table) -> maps:remove(Player#player.id, Table).
 
 update_player(UpdatedPlayer, Table) ->
+  io:format("Updated Player hand length ~w~n", [length(UpdatedPlayer#player.hand)]),
    maps:update(UpdatedPlayer#player.id, UpdatedPlayer, Table).
 
 find_player(Player, Table) ->

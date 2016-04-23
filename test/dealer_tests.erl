@@ -16,9 +16,18 @@ dealer_test() ->
   {ok,Pid} = dealer:open_table(),
   Player = player:create_player(Pid, "Tim", 200),
   dealer:join_table(Player),
-  Cards = dealer:deal(Player, 10),
-  ?assert(length(Cards) =:= 2),
-  ?assert(length(dealer:hit(Player)) =:= 1).
+  Player2 = dealer:deal(Player, 10),
+  ?assert(length(Player2#player.hand) =:= 2),
+  Player3 = dealer:hit(Player2),
+  ?assert(length(Player3#player.hand) =:= 3),
+  Player4 = dealer:double_down(Player3, 20),
+  ?assert(length(Player4#player.hand) =:= 4),
+  ?assert(Player4#player.balance =:= 170),
+  Player5 = dealer:surrender(Player4),
+  ?assert(round(Player5#player.balance) =:= 185).
+
+
+
 
 
 %%double_down_test() -> .

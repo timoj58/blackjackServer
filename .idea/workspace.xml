@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4efa3eb1-ccc6-4146-8a11-ee4c8d4f31e0" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/deck_supervisor.erl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/table_supervisor.erl" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/dealer.erl" afterPath="$PROJECT_DIR$/src/dealer.erl" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/dealer_tests.erl" afterPath="$PROJECT_DIR$/test/dealer_tests.erl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/deck_server.erl" afterPath="$PROJECT_DIR$/src/deck_server.erl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/records.hrl" afterPath="$PROJECT_DIR$/include/records.hrl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/table_server.erl" afterPath="$PROJECT_DIR$/src/table_server.erl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/player.erl" afterPath="$PROJECT_DIR$/src/player.erl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/table.erl" afterPath="$PROJECT_DIR$/src/table.erl" />
     </list>
     <ignored path="blackjackServer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,8 +33,8 @@
       <file leaf-file-name="dealer.erl" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/dealer.erl">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.53170735">
-              <caret line="102" column="35" selection-start-line="102" selection-start-column="35" selection-end-line="102" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.49798793">
+              <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -48,17 +44,17 @@
         <entry file="file://$PROJECT_DIR$/src/table_server.erl">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
+              <caret line="62" column="25" selection-start-line="62" selection-start-column="25" selection-end-line="62" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="hand_tests.erl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/hand_tests.erl">
+      <file leaf-file-name="table.erl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/table.erl">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+              <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -98,7 +94,7 @@
         <entry file="file://$PROJECT_DIR$/test/dealer_tests.erl">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="31" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
+              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -108,7 +104,7 @@
         <entry file="file://$PROJECT_DIR$/src/player.erl">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+              <caret line="34" column="38" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -128,7 +124,7 @@
         <entry file="file://$PROJECT_DIR$/include/records.hrl">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+              <caret line="9" column="58" selection-start-line="9" selection-start-column="58" selection-end-line="9" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -175,15 +171,15 @@
         <option value="$PROJECT_DIR$/src/table_supervisor.erl" />
         <option value="$PROJECT_DIR$/src/dealer_supervisor.erl" />
         <option value="$PROJECT_DIR$/test/player_tests.erl" />
-        <option value="$PROJECT_DIR$/src/player.erl" />
-        <option value="$PROJECT_DIR$/src/table.erl" />
         <option value="$PROJECT_DIR$/test/table_tests.erl" />
         <option value="$PROJECT_DIR$/src/deck_supervisor.erl" />
         <option value="$PROJECT_DIR$/src/deck_server.erl" />
         <option value="$PROJECT_DIR$/src/table_server.erl" />
         <option value="$PROJECT_DIR$/include/records.hrl" />
-        <option value="$PROJECT_DIR$/src/dealer.erl" />
+        <option value="$PROJECT_DIR$/src/table.erl" />
         <option value="$PROJECT_DIR$/test/dealer_tests.erl" />
+        <option value="$PROJECT_DIR$/src/player.erl" />
+        <option value="$PROJECT_DIR$/src/dealer.erl" />
       </list>
     </option>
   </component>
@@ -581,14 +577,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/table.erl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="29" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/dealer_supervisor.erl">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -645,30 +633,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/table_server.erl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/records.hrl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/player.erl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/deck.erl">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -677,18 +641,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/table.erl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/table_server.erl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="62" column="25" selection-start-line="62" selection-start-column="25" selection-end-line="62" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/records.hrl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="58" selection-start-line="9" selection-start-column="58" selection-end-line="9" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/dealer_tests.erl">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="31" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/player.erl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="38" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/dealer.erl">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53170735">
-          <caret line="102" column="35" selection-start-line="102" selection-start-column="35" selection-end-line="102" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.49798793">
+          <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
           <folding />
         </state>
       </provider>
