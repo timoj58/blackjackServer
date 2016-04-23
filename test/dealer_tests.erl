@@ -12,7 +12,7 @@
 -include_lib("eunit/include/eunit.hrl").
 -include("records.hrl").
 
-dealer_test() ->
+dealer_server_test() ->
   {ok,Pid} = dealer_server:open_table(),
   Player = player:create_player(Pid, "Tim", 200),
   dealer_server:join_table(Player),
@@ -27,7 +27,7 @@ dealer_test() ->
   ?assert(round(Player5#player.balance) =:= 185),
 
 
-  Player6 = Player#player{hand=[#card{suit="Aces", value="Queen", numericValue={10,10}}, #card{suit="Aces", value="Queen", numericValue={10,10}}]},
+  Player6 = Player#player{hand=[#card{suit="Spades", value="Queen", numericValue={10,10}}, #card{suit="Spades", value="Queen", numericValue={10,10}}]},
   Player7 = dealer_server:split(Player6),
   ?assert(length(Player7#player.hand) == 1),
   ?assert(length(Player7#player.split_hand) == 1).
@@ -35,12 +35,3 @@ dealer_test() ->
 
 
 
-
-
-
-
-%%double_down_test() -> .
-
-
-
-%%surrender_test() -> .
