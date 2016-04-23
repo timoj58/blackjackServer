@@ -21,9 +21,12 @@ get_hand_values([], Acc) ->
 get_hand_values([Card|Hand], Acc) ->
   {Value,AltValue} = Card#card.numericValue,
   if Value /= AltValue ->
+     io:format("its an Ace~n", []),
     %% if our acc is empty, then need to add a value to it.
     HandValues = lists:append(add_hand_value(Acc, Value, []),add_hand_value(Acc, AltValue, []));
-    true -> HandValues = add_hand_value(Acc, Value, [])
+    true ->
+      io:format("its not an Ace~n", []),
+      HandValues = add_hand_value(Acc, Value, [])
   end,
   get_hand_values(Hand, HandValues).
 

@@ -32,6 +32,15 @@ dealer_server_test() ->
   ?assert(length(Player7#player.hand) == 1),
   ?assert(length(Player7#player.split_hand) == 1).
 
+dealer_hand_test() ->
+  %% we need a hand....so
+  Card = card:create_card("Spades", "Queen"),
+  Card2 = card:create_card("Spades", "Queen"),
+
+  HandValue = dealer:get_hand_values([Card,Card2], [0]),
+  io:format("hand is  ~s", [HandValue]),
+  ?assert(hd(HandValue) =:= 20).
+
 
 
 
