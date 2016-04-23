@@ -1,9 +1,5 @@
 %%%-------------------------------------------------------------------
 %%% @author timmytime
-%%% @copyright (C) 2016, <COMPANY>
-%%% @doc
-%%%
-%%% @end
 %%% Created : 22. Apr 2016 11:23
 %%%-------------------------------------------------------------------
 -module(dealer_tests).
@@ -83,6 +79,20 @@ dealer_validate_ace_hand_test() ->
   Res = dealer:validate_hand_values(HandValue, "False"),
 
   ?assert(Res =:= "True").
+
+dealer_validate_ace_fail_hand_test() ->
+
+  Card = card:create_card("Spades", "Queen"),
+  Card2 = card:create_card("Spades", "Ace"),
+  Card3 = card:create_card("Spades", "King"),
+  Card4 = card:create_card("Spades", 2),
+
+
+  HandValue = dealer:get_hand_values([Card,Card2, Card3, Card4], [0]),
+
+  Res = dealer:validate_hand_values(HandValue, "False"),
+
+  ?assert(Res =:= "False").
 
 
 
