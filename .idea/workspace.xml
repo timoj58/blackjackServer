@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4efa3eb1-ccc6-4146-8a11-ee4c8d4f31e0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/card_tests.erl" afterPath="$PROJECT_DIR$/test/card_tests.erl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/dealer.erl" afterPath="$PROJECT_DIR$/src/dealer.erl" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/dealer_tests.erl" afterPath="$PROJECT_DIR$/test/dealer_tests.erl" />
     </list>
     <ignored path="blackjackServer.iws" />
@@ -72,8 +70,8 @@
       <file leaf-file-name="dealer_tests.erl" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/dealer_tests.erl">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.54146343">
-              <caret line="37" column="46" selection-start-line="37" selection-start-column="46" selection-end-line="37" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.6585366">
+              <caret line="45" column="34" selection-start-line="45" selection-start-column="34" selection-end-line="45" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -713,8 +711,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/dealer_tests.erl">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.54146343">
-          <caret line="37" column="46" selection-start-line="37" selection-start-column="46" selection-end-line="37" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.6585366">
+          <caret line="45" column="34" selection-start-line="45" selection-start-column="34" selection-end-line="45" selection-end-column="34" />
           <folding />
         </state>
       </provider>

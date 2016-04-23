@@ -38,8 +38,16 @@ dealer_hand_test() ->
   Card2 = card:create_card("Spades", "Queen"),
 
   HandValue = dealer:get_hand_values([Card,Card2], [0]),
-  io:format("hand is  ~s", [HandValue]),
-  ?assert(hd(HandValue) =:= 20).
+  ?assert(hd(HandValue) =:= 20),
+
+  Card3 = card:create_card("Spades", "Ace"),
+  Card4 = card:create_card("Spades", "Queen"),
+
+  HandValue2 = dealer:get_hand_values([Card3,Card4], [0]),
+  ?assert((hd(HandValue2) =:= 21)),
+  ?assert((lists:nth(2,HandValue2) =:= 11)).
+
+
 
 
 
